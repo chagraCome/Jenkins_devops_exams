@@ -11,13 +11,14 @@ stages {
             steps {
                 script {
                 sh '''
+                docker rm -f $DOCKER_IMAGE_CAST
                 docker build -t $DOCKER_ID/$DOCKER_IMAGE_CAST:$DOCKER_TAG ./cast-service
                 sleep 6
                 '''
                 }
                  script {
                 sh '''
-                 
+                docker rm -f $DOCKER_IMAGE_MOVIE
                 docker build -t $DOCKER_ID/$DOCKER_IMAGE_MOVIE:$DOCKER_TAG ./movie-service
                 sleep 6
                 '''
