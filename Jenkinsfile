@@ -29,7 +29,7 @@ stages {
                 steps {
                     script {
                     sh '''
-                    docker rm cast-db
+                    docker rm --force cast-db
                     docker run -d --rm --name cast-db  --env POSTGRES_USER=cast_db_username --env POSTGRES_PASSWORD=cast_db_password --env POSTGRES_DB=cast_db_dev postgres:12.1-alpine 
                     docker run -d -p 8002:8000 --name cast-service --rm --env DATABASE_URI=postgresql://cast_db_username:cast_db_password@cast_db/cast_db_dev $DOCKER_ID/$DOCKER_IMAGE_CAST:$DOCKER_TAG 
 
