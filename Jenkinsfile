@@ -51,8 +51,6 @@ stages {
             steps {
                     script {
                     sh '''
-                    curl http://movie_service:8000
-                    curl http://cast_service:8000
                     curl http://localhost:8080/api/v1/movies/docs 
                     curl http://localhost:8080/api/v1/casts/docs
                     '''
