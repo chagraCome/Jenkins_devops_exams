@@ -18,6 +18,8 @@ spec:
       containers:
         - name:     {{ .Release.Name }}-movie_service
           image: "{{ .Values.movie_service.image.repository }}:{{ .Values.movie_service.image.tag | default .Chart.AppVersion }}"
+          command: [{{ .Values.movie_service.image.command }}]
+          args: {{ .Values.movie_service.image.arg }}
           ports:
             - name: http
               containerPort: {{ .Values.movie_service.service.port }}
@@ -52,10 +54,10 @@ spec:
           image: "{{ .Values.movie_db.image.repository }}:{{ .Values.movie_db.image.tag | default .Chart.AppVersion }}"
           ports:
           env:
-          - name: {{ .Values.movie_db.envName1 }}
-            value: {{ .Values.movie_db.envValue1 }}
-          - name: {{ .Values.movie_db.envName2 }}
-            value: {{ .Values.movie_db.envValue2 }}
-          - name: {{ .Values.movie_db.envName3 }}
-            value: {{ .Values.movie_db.envValue3 }}
+          - name: {{ .Values.movie_db.POSTGRES_USER }}
+            value: {{ .Values.movie_db.OSTGRES_USER_value}}
+          - name: {{ .Values.movie_db.POSTGRES_PASSWORD }}
+            value: {{ .Values.movie_db.POSTGRES_PASSWORD_value }}
+          - name: {{ .Values.movie_db.POSTGRES_DB }}
+            value: {{ .Values.movie_db.POSTGRES_DB_value }}
       volumes: {{ .Values.movie_db.valumes }}
