@@ -1,72 +1,61 @@
+{{/**** deployment****/}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "exam.fullname" . }}
+  name: {{ .Release.Name }}-movie_service
   labels:
-    {{- include "exam.labels" . | nindent 4 }}
+    app: {{ .Release.Name }}-movie_service
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
+  replicas: {{ .Values.movie_service.replicaCount }}
   selector:
     matchLabels:
-      {{- include "exam.selectorLabels" . | nindent 6 }}
+      app: {{ .Release.Name }}-movie_service
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
-        {{- include "exam.labels" . | nindent 8 }}
-	{{- with .Values.podLabels }}
-        {{- toYaml . | nindent 8 }}
-        {{- end }}
+        app: {{ .Release.Name }}-movie_service
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "exam.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+        - name:     {{ .Release.Name }}-movie_service
+          image: "{{ .Values.movie_service.image.repository }}:{{ .Values.movie_service.image.tag | default .Chart.AppVersion }}"
           ports:
             - name: http
-              containerPort: {{ .Values.service.port }}
+              containerPort: {{ .Values.movie_service.service.port }}
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-          {{- with .Values.volumeMounts }}
-          volumeMounts:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-      {{- with .Values.volumes }}
-      volumes:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+                    env:
+          env:
+          - name: {{ .Values.movie_service.envName1 }}
+            value: {{ .Values.movie_service.envValue1 }}
+          - name: {{ .Values.movie_service.envName2 }}
+            value: {{ .Values.movie_service.envValue2 }}
+
+{{/**** deployment for movie_db ****/}}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-movie_db
+  labels:
+    app: {{ .Release.Name }}-movie_db
+spec:
+  replicas: {{ .Values.movie_db.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-movie_db
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-movie_db
+    spec:
+      containers:
+        - name: {{ .Release.Name }}-movie_db
+          image: "{{ .Values.movie_db.image.repository }}:{{ .Values.movie_db.image.tag | default .Chart.AppVersion }}"
+          ports:
+          env:
+          - name: {{ .Values.movie_db.envName1 }}
+            value: {{ .Values.movie_db.envValue1 }}
+          - name: {{ .Values.movie_db.envName2 }}
+            value: {{ .Values.movie_db.envValue2 }}
+          - name: {{ .Values.movie_db.envName3 }}
+            value: {{ .Values.movie_db.envValue3 }}
+      volumes: {{ .Values.movie_db.valumes }}
