@@ -29,12 +29,12 @@ stages {
                 steps {
                     script {
                     sh '''
-                    docker run -d --name cast-db --rm --network local-net --env POSTGRES_USER=cast_db_username --env POSTGRES_PASSWORD=cast_db_password --env POSTGRES_DB=cast_db_dev postgres:12.1-alpine 
-                    docker run -d -p 8002:8000 --name cast-service --rm --network local-net --env DATABASE_URI=postgresql://cast_db_username:cast_db_password@cast_db/cast_db_dev $DOCKER_ID/$DOCKER_IMAGE_CAST:$DOCKER_TAG 
+                    docker run --rm  -d --name cast-db  --network local-net --env POSTGRES_USER=cast_db_username --env POSTGRES_PASSWORD=cast_db_password --env POSTGRES_DB=cast_db_dev postgres:12.1-alpine 
+                    docker run --rm  -d -p 8002:8000 --name cast-service --network local-net --env DATABASE_URI=postgresql://cast_db_username:cast_db_password@cast_db/cast_db_dev $DOCKER_ID/$DOCKER_IMAGE_CAST:$DOCKER_TAG 
 
-                    docker run -d --name movie_db --rm --network local-net --env POSTGRES_USER=movie_db_username --env POSTGRES_PASSWORD=movie_db_password --env POSTGRES_DB=movie_db_dev postgres:12.1-alpine
-                    docker run -d -p 8001:8000 --name movie-service --rm --network local-net --env DATABASE_URI=postgresql://movie_db_username:movie_db_password@movie_db/movie_db_dev --env CAST_SERVICE_HOST_URL=http://cast_service:8000/api/v1/casts/  $DOCKER_ID/$DOCKER_IMAGE_MOVIE:$DOCKER_TAG 
-                    docker run -d -p 8089:8080 --name nginx --rm --network local-net nginx:latest
+                    docker run --rm  -d --name movie_db --network local-net --env POSTGRES_USER=movie_db_username --env POSTGRES_PASSWORD=movie_db_password --env POSTGRES_DB=movie_db_dev postgres:12.1-alpine
+                    docker run --rm -d -p 8001:8000 --name movie-service  --network local-net --env DATABASE_URI=postgresql://movie_db_username:movie_db_password@movie_db/movie_db_dev --env CAST_SERVICE_HOST_URL=http://cast_service:8000/api/v1/casts/  $DOCKER_ID/$DOCKER_IMAGE_MOVIE:$DOCKER_TAG 
+                    docker run --rm  -d -p 8089:8080 --name nginx  --network local-net nginx:latest
                     
                     sleep 10
                     '''
