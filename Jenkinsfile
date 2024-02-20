@@ -35,7 +35,7 @@ stages {
 
                     docker run -d --name movie_db --rm --env POSTGRES_USER=movie_db_username --env POSTGRES_PASSWORD=movie_db_password --env POSTGRES_DB=movie_db_dev postgres:12.1-alpine
                     docker run -d -p 8001:8000 --name movie-service --rm --env DATABASE_URI=postgresql://movie_db_username:movie_db_password@movie_db/movie_db_dev --env CAST_SERVICE_HOST_URL=http://cast_service:8000/api/v1/casts/  $DOCKER_ID/$DOCKER_IMAGE_MOVIE:$DOCKER_TAG 
-                    docker run -d -p 8085:8080 --name nginx --rm nginx:latest
+                    docker run -d -p 8089:8080 --name nginx --rm nginx:latest
                     
                     sleep 10
                     '''
