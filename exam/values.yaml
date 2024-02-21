@@ -5,7 +5,7 @@ movieDb:
     tag: "latest"
   service:
     type: ClusterIP
-    port:  5432
+    port: 5432
   env:
     POSTGRES_USER: POSTGRES_USER
     OSTGRES_USER_value: movie_db_username
@@ -40,7 +40,7 @@ castDb:
     tag: "latest"
   service:
     type: ClusterIP
-    port:  5432
+    port: 5432
   env:
     POSTGRES_USER: POSTGRES_USER
     POSTGRES_USER_value: cast_db_username
@@ -59,7 +59,7 @@ castService:
     args: ["app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8001"]
   service:
     type: ClusterIP
-    port:  8002
+    port: 8002
     targetPort: 8000
   env:
     envName1: DATABASE_URI
@@ -73,6 +73,6 @@ nginx:
     tag: "latest"
   service:
     type: NodePort
-    port:  8089
+    port: 8089
     targetPort: 8000
   volumes: ./nginx_config.conf:/etc/nginx/conf.d/default.conf
