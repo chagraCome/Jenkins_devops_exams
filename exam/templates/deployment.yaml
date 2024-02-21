@@ -112,7 +112,7 @@ spec:
         - name:     {{ .Release.Name }}-cast_service
           image: "{{ .Values.cast_service.image.repository }}:{{ .Values.cast_service.image.tag | default .Chart.AppVersion }}"
           command: [{{ .Values.cast_service.command }}]
-          args: {{ .Values.cast_service.image.command.arg }}
+          args: {{ .Values.cast_service.image.arg }}
           ports:
             - name: http
               containerPort: {{ .Values.cast_service.service.port }}
