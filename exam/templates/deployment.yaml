@@ -24,7 +24,6 @@ spec:
             value: {{ .Values.movie_db.env.POSTGRES_PASSWORD_value }}
           - name: {{ .Values.movie_db.env.POSTGRES_DB }}
             value: {{ .Values.movie_db.env.POSTGRES_DB_value }}
-      volumes: {{ .Values.movie_db.volumes }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -56,7 +55,6 @@ spec:
             value: {{ .Values.movie_service.env.envValue1 }}
           - name: {{ .Values.movie_service.env.envName2 }}
             value: {{ .Values.movie_service.env.envValue2 }}
-      volumes: {{ .Values.cast_db.volumes }}
 ---
 
 apiVersion: apps/v1
@@ -86,7 +84,7 @@ spec:
             value: {{ .Values.cast_db.env.POSTGRES_PASSWORD_value }}
           - name: {{ .Values.cast_db.env.POSTGRES_DB }}
             value: {{ .Values.cast_db.env.POSTGRES_DB_value }}
-      volumes: {{ .Values.cast_db.volumes }}
+
 
 ---
 apiVersion: apps/v1
@@ -117,8 +115,6 @@ spec:
           env:
           - name: {{ .Values.cast_service.env.envName1 }}
             value: {{ .Values.cast_service.env.envValue1 }}
-      volumes: {{ .Values.cast_service.volumes }}
-
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -141,5 +137,4 @@ spec:
           image: "{{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag | default .Chart.AppVersion }}"
           ports:
               containerPort: {{ .Values.nginx.service.port }}
-      volumes: {{ .Values.nginx.volumes }}
           
