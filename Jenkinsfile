@@ -33,7 +33,7 @@ stages {
                     docker run -d --rm -p 8002:8000 --name cast_service --network jenkins_devops_exams_default --env DATABASE_URI=postgresql://cast_db_username:cast_db_password@cast-db/cast_db_dev $DOCKER_ID/$DOCKER_IMAGE_CAST:$DOCKER_TAG 
                     docker run -d --rm --name movie_db --network jenkins_devops_exams_default --env POSTGRES_USER=movie_db_username --env POSTGRES_PASSWORD=movie_db_password --env POSTGRES_DB=movie_db_dev postgres:12.1-alpine
                     docker run -d --rm -p 8001:8000 --name movie_service --network jenkins_devops_exams_default --env DATABASE_URI=postgresql://movie_db_username:movie_db_password@movie_db/movie_db_dev --env CAST_SERVICE_HOST_URL=http://cast_service:8000/api/v1/casts/  $DOCKER_ID/$DOCKER_IMAGE_MOVIE:$DOCKER_TAG 
-                    docker run -d --rm-p 8089:8089 --name nginx --network jenkins_devops_exams_default nginx:latest
+                    docker run -d --rm -p 8089:8089 --name nginx --network jenkins_devops_exams_default nginx:latest
                     
                     sleep 10
                     '''
