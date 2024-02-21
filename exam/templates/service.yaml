@@ -1,15 +1,50 @@
+{{/**** service movie_service ****/}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "exam.fullname" . }}
+  name: {{ .Release.Name }}-movie_service
   labels:
-    {{- include "exam.labels" . | nindent 4 }}
+    app: {{ .Release.Name }}-movie_service
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ .Values.movie_service.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ .Values.movie_service.service.port }}
       targetPort: http
       protocol: TCP
       name: http
   selector:
-    {{- include "exam.selectorLabels" . | nindent 4 }}
+    app: {{ .Release.Name }}-movie_service
+
+{{/*** service cast_service***/}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-cast_service
+  labels:
+    app: {{ .Release.Name }}-datascientest
+spec:
+  type: {{ .Values.cast_service.service.type }}
+  ports:
+    - port: {{ .Values.cast_service.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ .Release.Name }}-cast_service
+
+{{/***Service Nginx ***/}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-nginx
+  labels:
+    app: {{ .Release.Name }}-nginx
+spec:
+  type: {{ .Values.nginx.service.type }}
+  ports:
+    - port: {{ .Values.nginx.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ .Release.Name }}-datascientest
