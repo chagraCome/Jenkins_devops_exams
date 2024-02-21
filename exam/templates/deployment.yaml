@@ -1,29 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-movie_db
+  name: {{ .Release.Name }}-movie-db
   labels:
-    app: {{ .Release.Name }}-movie_db
+    app: {{ .Release.Name }}-movie-db
 spec:
-  replicas: {{ .Values.movie_db.replicaCount }}
+  replicas: {{ .Values.movie-db.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-movie_db
+      app: {{ .Release.Name }}-movie-db
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-movie_db
+        app: {{ .Release.Name }}-movie-db
     spec:
       containers:
-        - name: {{ .Release.Name }}-movie_db
-          image: "{{ .Values.movie_db.image.repository }}:{{ .Values.movie_db.image.tag | default .Chart.AppVersion }}"
+        - name: {{ .Release.Name }}-movie-db
+          image: "{{ .Values.movie-db.image.repository }}:{{ .Values.movie-db.image.tag | default .Chart.AppVersion }}"
           env:
-          - name: {{ .Values.movie_db.env.POSTGRES_USER }}
-            value: {{ .Values.movie_db.env.POSTGRES_USER_value}}
-          - name: {{ .Values.movie_db.env.POSTGRES_PASSWORD }}
-            value: {{ .Values.movie_db.env.POSTGRES_PASSWORD_value }}
-          - name: {{ .Values.movie_db.env.POSTGRES_DB }}
-            value: {{ .Values.movie_db.env.POSTGRES_DB_value }}
+          - name: {{ .Values.movie-db.env.POSTGRES_USER }}
+            value: {{ .Values.movie-db.env.POSTGRES_USER_value}}
+          - name: {{ .Values.movie-db.env.POSTGRES_PASSWORD }}
+            value: {{ .Values.movie-db.env.POSTGRES_PASSWORD_value }}
+          - name: {{ .Values.movie-db.env.POSTGRES_DB }}
+            value: {{ .Values.movie-db.env.POSTGRES_DB_value }}
 ---
 apiVersion: apps/v1
 kind: Deployment
