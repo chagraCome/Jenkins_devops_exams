@@ -7,12 +7,12 @@ movieDb:
     type: ClusterIP
     port: 5432
   env:
-    POSTGRES_USER: POSTGRES_USER
-    OSTGRES_USER_value: movie_db_username
-    POSTGRES_PASSWORD: POSTGRES_PASSWORD
-    POSTGRES_PASSWORD_value: movie_db_password
-    POSTGRES_DB: POSTGRES_DB
-    POSTGRES_DB_value: movie_db_dev
+    POSTGRESUSER: POSTGRES_USER
+    OSTGRESUSERvalue: movie_db_username
+    POSTGRESPASSWORD: POSTGRES_PASSWORD
+    POSTGRESPASSWORDvalue: movie_db_password
+    POSTGRESDB: POSTGRES_DB
+    POSTGRESDBvalue: movie_db_dev
   volumes: postgres_data_movie:/var/lib/postgresql/data/
 
 movieService:

@@ -21,13 +21,12 @@ spec:
             - name: postgres
               containerPort: {{ .Values.movieDb.service.port }}
           env:
-            - name: {{ .Values.movieDb.env.POSTGRES_USER }}
-              value: {{ .Values.movieDb.env.POSTGRES_USER_value}}
-            - name: {{ .Values.movieDb.env.POSTGRES_PASSWORD }}
-              value: {{ .Values.movieDb.env.POSTGRES_PASSWORD_value }}
-            - name: {{ .Values.movieDb.env.POSTGRES_DB }}
-              value: {{ .Values.movieDb.env.POSTGRES_DB_value }}
-
+            - name: {{ .Values.movieDb.env.POSTGRESUSER }}
+              value: {{ .Values.movieDb.env.POSTGRESUSERvalue}}
+            - name: {{ .Values.movieDb.env.POSTGRESPASSWORD }}
+              value: {{ .Values.movieDb.env.POSTGRESPASSWORDvalue }}
+            - name: {{ .Values.movieDb.env.POSTGRESDB }}
+              value: {{ .Values.movieDb.env.POSTGRESDBvalue }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -55,10 +54,10 @@ spec:
             containerPort: {{ .Values.movieService.service.port }}
             protocol: TCP
           env:
-          - name: {{ .Values.movieService.env.envName1 }}
-            value: {{ .Values.movieService.env.envValue1 }}
-          - name: {{ .Values.movieService.env.envName2 }}
-            value: {{ .Values.movieService.env.envValue2 }}
+            - name: {{ .Values.movieService.env.envName1 }}
+              value: {{ .Values.movieService.env.envValue1 }}
+            - name: {{ .Values.movieService.env.envName2 }}
+              value: {{ .Values.movieService.env.envValue2 }}
 ---
 
 apiVersion: apps/v1
@@ -83,12 +82,12 @@ spec:
           ports:
             containerPort: {{ .Values.castDb.service.port }} 
           env:
-          - name: {{ .Values.castDb.env.POSTGRES_USER }}
-            value: {{ .Values.castDb.env.POSTGRES_USER_value}}
-          - name: {{ .Values.castDb.env.POSTGRES_PASSWORD }}
-            value: {{ .Values.castDb.env.POSTGRES_PASSWORD_value }}
-          - name: {{ .Values.castDb.env.POSTGRES_DB }}
-            value: {{ .Values.castDb.env.POSTGRES_DB_value }}
+            - name: {{ .Values.castDb.env.POSTGRES_USER }}
+              value: {{ .Values.castDb.env.POSTGRES_USER_value}}
+            - name: {{ .Values.castDb.env.POSTGRES_PASSWORD }}
+              value: {{ .Values.castDb.env.POSTGRES_PASSWORD_value }}
+            - name: {{ .Values.castDb.env.POSTGRES_DB }}
+              value: {{ .Values.castDb.env.POSTGRES_DB_value }}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -114,8 +113,8 @@ spec:
           ports:
             containerPort: {{ .Values.castService.service.port }}
           env:
-          - name: {{ .Values.castService.env.envName1 }}
-            value: {{ .Values.castService.env.envValue1 }}
+            - name: {{ .Values.castService.env.envName1 }}
+              value: {{ .Values.castService.env.envValue1 }}
 
 ---
 apiVersion: apps/v1
