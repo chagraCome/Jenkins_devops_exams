@@ -1,4 +1,4 @@
-movie_db:
+movie-db:
   replicaCount: 1
   image: 
     repository: postgres:12.1-alpine
