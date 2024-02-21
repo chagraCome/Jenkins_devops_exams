@@ -1,3 +1,19 @@
+{{/*** service movie_db***/}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-movie_db
+  labels:
+    app: {{ .Release.Name }}-movie_db
+spec:
+  type: {{ .Values.movie_db.service.type }}
+  ports:
+    - port: {{ .Values.movie_db.service.port }}
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ .Release.Name }}-movie_db
+
 {{/**** service movie_service ****/}}
 apiVersion: v1
 kind: Service
@@ -15,6 +31,21 @@ spec:
   selector:
     app: {{ .Release.Name }}-movie_service
 
+{{/*** service cast_db***/}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-cast_db
+  labels:
+    app: {{ .Release.Name }}-cast_db
+spec:
+  type: {{ .Values.cast_db.service.type }}
+  ports:
+    - port: {{ .Values.cast_db.service.port }}
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ .Release.Name }}-cast_db
 {{/*** service cast_service***/}}
 apiVersion: v1
 kind: Service

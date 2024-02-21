@@ -3,6 +3,9 @@ movie_db:
   image: 
     repository: postgres:12.1-alpine
     tag: "latest"
+    service:
+    type: ClusterIP
+    port:  5432
   env:
     POSTGRES_USER: POSTGRES_USER
     OSTGRES_USER_value: movie_db_username
@@ -35,6 +38,9 @@ cast_db:
   image:
     repository: postgres:12.1-alpine
     tag: "latest"
+  service:
+    type: ClusterIP
+    port:  5432
   env:
     POSTGRES_USER: POSTGRES_USER
     POSTGRES_USER_value: cast_db_username
