@@ -71,10 +71,10 @@ metadata:
   labels:
     app: {{ .Release.Name }}-nginx
 spec:
-  type: {{ .Values.nginx.service.type }}
+  type: {{ .Values.nginx.service.type}}
   ports:
     - port: {{ .Values.nginx.service.port }}
-      targetPort: http
+      targetPort: {{ .Values.nginx.service.targetPort }}
       protocol: TCP
       name: http
   selector:
