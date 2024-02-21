@@ -8,7 +8,7 @@ movieDb:
     port: 5432
   env:
     POSTGRESUSER: POSTGRES_USER
-    OSTGRESUSERvalue: movie_db_username
+    POSTGRESUSERvalue: movie_db_username
     POSTGRESPASSWORD: POSTGRES_PASSWORD
     POSTGRESPASSWORDvalue: movie_db_password
     POSTGRESDB: POSTGRES_DB

@@ -17,16 +17,17 @@ spec:
       containers:
         - name: {{ .Release.Name }}-movie-db
           image: "{{ .Values.movieDb.image.repository }}:{{ .Values.movieDb.image.tag | default .Chart.AppVersion }}"
+          env:
+            - name: POSTGRES_USER
+              value: movie_db_username
+            - name: POSTGRES_PASSWORD
+              value: movie_db_password
+            - name: POSTGRES_DB
+              value: movie_db_dev
           ports:
             - name: postgres
               containerPort: {{ .Values.movieDb.service.port }}
-          env:
-            - name: {{ .Values.movieDb.env.POSTGRESUSER }}
-              value: {{ .Values.movieDb.env.POSTGRESUSERvalue}}
-            - name: {{ .Values.movieDb.env.POSTGRESPASSWORD }}
-              value: {{ .Values.movieDb.env.POSTGRESPASSWORDvalue }}
-            - name: {{ .Values.movieDb.env.POSTGRESDB }}
-              value: {{ .Values.movieDb.env.POSTGRESDBvalue }}
+              protocol: TCP
 ---
 apiVersion: apps/v1
 kind: Deployment
