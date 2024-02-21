@@ -28,7 +28,7 @@ movieService:
     targetPort: 8000
   env:
     envName1: DATABASE_URI
-    envValue1: postgresql://movie_db_username:movie_db_password@movie_db/movie_db_dev
+    envValue1: postgresql://movie_db_username:movie_db_password@{{ .Release.Name }}-movie-db/movie_db_dev
     envName2: CAST_SERVICE_HOST_URL
     envValue2: http://cast_service:8000/api/v1/casts/
   volumes: ./movie-service/:/app/
@@ -63,7 +63,7 @@ castService:
     targetPort: 8000
   env:
     envName1: DATABASE_URI
-    envValue1: postgresql://cast_db_username:cast_db_password@cast_db/cast_db_dev
+    envValue1: postgresql://cast_db_username:cast_db_password@{{ .Release.Name }}-cast-db/cast_db_dev
   volumes: ./cast-service/:/app/
 
 nginx:

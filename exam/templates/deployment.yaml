@@ -81,7 +81,9 @@ spec:
         - name: {{ .Release.Name }}-cast-db
           image: "{{ .Values.castDb.image.repository }}:{{ .Values.castDb.image.tag | default .Chart.AppVersion }}"
           ports:
-            containerPort: {{ .Values.castDb.service.port }} 
+            - name: http
+              containerPort: {{ .Values.castDb.service.port }} 
+              protocol: TCP
           env:
             - name: {{ .Values.castDb.env.POSTGRES_USER }}
               value: {{ .Values.castDb.env.POSTGRES_USER_value}}
@@ -112,7 +114,9 @@ spec:
           command: [{{ .Values.castService.command }}]
           args: {{ .Values.castService.image.arg }}
           ports:
-            containerPort: {{ .Values.castService.service.port }}
+            - name: http
+              containerPort: {{ .Values.castService.service.port }}
+              protocol: TCP
           env:
             - name: {{ .Values.castService.env.envName1 }}
               value: {{ .Values.castService.env.envValue1 }}
@@ -138,4 +142,6 @@ spec:
         - name: {{ .Release.Name }}-nginx
           image: "{{ .Values.nginx.image.repository }}:{{ .Values.nginx.image.tag | default .Chart.AppVersion }}"
           ports:
-            containerPort: {{ .Values.nginx.service.port }}
+            - name: http
+              containerPort: {{ .Values.nginx.service.port }}
+              protocol: TCP
