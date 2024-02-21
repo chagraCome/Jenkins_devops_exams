@@ -67,7 +67,7 @@ cast_service:
   volumes: ./cast-service/:/app/
 
 nginx:
-    replicaCount: 1
+  replicaCount: 1
   image:
     repository: nginx
     tag: "latest"
