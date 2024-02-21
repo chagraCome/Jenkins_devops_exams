@@ -1,4 +1,3 @@
-{{/*** service movie_db***/}}
 apiVersion: v1
 kind: Service
 metadata:
@@ -6,62 +5,62 @@ metadata:
   labels:
     app: {{ .Release.Name }}-movie-db
 spec:
-  type: {{ .Values.movie-db.service.type }}
+  type: {{ .Values.movieDb.service.type }}
   ports:
-    - port: {{ .Values.movie-db.service.port }}
+    - port: {{ .Values.movieDb.service.port }}
       protocol: TCP
       name: http
   selector:
     app: {{ .Release.Name }}-movie-db
 
-{{/**** service movie_service ****/}}
+{{/**** service movie-service ****/}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-movie_service
+  name: {{ .Release.Name }}-movie-service
   labels:
-    app: {{ .Release.Name }}-movie_service
+    app: {{ .Release.Name }}-movie-service
 spec:
-  type: {{ .Values.movie_service.service.type }}
+  type: {{ .Values.movieService.service.type }}
   ports:
-    - port: {{ .Values.movie_service.service.port }}
+    - port: {{ .Values.movieService.service.port }}
       targetPort: http
       protocol: TCP
       name: http
   selector:
-    app: {{ .Release.Name }}-movie_service
+    app: {{ .Release.Name }}-movie-service
 
 {{/*** service cast_db***/}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-cast_db
+  name: {{ .Release.Name }}-cast-db
   labels:
-    app: {{ .Release.Name }}-cast_db
+    app: {{ .Release.Name }}-cast-db
 spec:
-  type: {{ .Values.cast_db.service.type }}
+  type: {{ .Values.castDb.service.type }}
   ports:
-    - port: {{ .Values.cast_db.service.port }}
+    - port: {{ .Values.castDb.service.port }}
       protocol: TCP
       name: http
   selector:
-    app: {{ .Release.Name }}-cast_db
+    app: {{ .Release.Name }}-cast-db
 {{/*** service cast_service***/}}
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-cast_service
+  name: {{ .Release.Name }}-cast-service
   labels:
-    app: {{ .Release.Name }}-datascientest
+    app: {{ .Release.Name }}-cast-service
 spec:
-  type: {{ .Values.cast_service.service.type }}
+  type: {{ .Values.castService.service.type }}
   ports:
-    - port: {{ .Values.cast_service.service.port }}
+    - port: {{ .Values.castService.service.port }}
       targetPort: http
       protocol: TCP
       name: http
   selector:
-    app: {{ .Release.Name }}-cast_service
+    app: {{ .Release.Name }}-cast-service
 
 {{/***Service Nginx ***/}}
 apiVersion: v1
@@ -78,4 +77,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: {{ .Release.Name }}-datascientest
+    app: {{ .Release.Name }}-cast-service

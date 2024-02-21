@@ -1,4 +1,4 @@
-movie-db:
+movieDb:
   replicaCount: 1
   image: 
     repository: postgres:12.1-alpine
@@ -15,7 +15,7 @@ movie-db:
     POSTGRES_DB_value: movie_db_dev
   volumes: postgres_data_movie:/var/lib/postgresql/data/
 
-movie_service:
+movieService:
   replicaCount: 1
   image:
     repository: chagraCome/movie-service
@@ -33,7 +33,7 @@ movie_service:
     envValue2: http://cast_service:8000/api/v1/casts/
   volumes: ./movie-service/:/app/
 
-cast_db:
+castDb:
   replicaCount: 1
   image:
     repository: postgres:12.1-alpine
@@ -50,7 +50,7 @@ cast_db:
     POSTGRES_DB_value: cast_db_dev
   volumes: postgres_data_cast:/var/lib/postgresql/data/
 
-cast_service:
+castService:
   replicaCount: 1
   image:
     repository: chagraCome/cast-service

@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{ .Release.Name }}-movie-db
 spec:
-  replicas: {{ .Values.movie-db.replicaCount }}
+  replicas: {{ .Values.movieDb.replicaCount }}
   selector:
     matchLabels:
       app: {{ .Release.Name }}-movie-db
@@ -16,105 +16,105 @@ spec:
     spec:
       containers:
         - name: {{ .Release.Name }}-movie-db
-          image: "{{ .Values.movie-db.image.repository }}:{{ .Values.movie-db.image.tag | default .Chart.AppVersion }}"
+          image: "{{ .Values.movieDb.image.repository }}:{{ .Values.movieDb.image.tag | default .Chart.AppVersion }}"
           env:
-          - name: {{ .Values.movie-db.env.POSTGRES_USER }}
-            value: {{ .Values.movie-db.env.POSTGRES_USER_value}}
-          - name: {{ .Values.movie-db.env.POSTGRES_PASSWORD }}
-            value: {{ .Values.movie-db.env.POSTGRES_PASSWORD_value }}
-          - name: {{ .Values.movie-db.env.POSTGRES_DB }}
-            value: {{ .Values.movie-db.env.POSTGRES_DB_value }}
+          - name: {{ .Values.movieDb.env.POSTGRES_USER }}
+            value: {{ .Values.movieDb.env.POSTGRES_USER_value}}
+          - name: {{ .Values.movieDb.env.POSTGRES_PASSWORD }}
+            value: {{ .Values.movieDb.env.POSTGRES_PASSWORD_value }}
+          - name: {{ .Values.movieDb.env.POSTGRES_DB }}
+            value: {{ .Values.movieDb.env.POSTGRES_DB_value }}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-movie_service
+  name: {{ .Release.Name }}-movie-service
   labels:
-    app: {{ .Release.Name }}-movie_service
+    app: {{ .Release.Name }}-movie-service
 spec:
-  replicas: {{ .Values.movie_service.replicaCount }}
+  replicas: {{ .Values.movieService.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-movie_service
+      app: {{ .Release.Name }}-movie-service
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-movie_service
+        app: {{ .Release.Name }}-movie-service
     spec:
       containers:
-        - name:     {{ .Release.Name }}-movie_service
-          image: "{{ .Values.movie_service.image.repository }}:{{ .Values.movie_service.image.tag | default .Chart.AppVersion }}"
-          command: [{{ .Values.movie_service.image.command }}]
-          args: {{ .Values.movie_service.image.arg }}
+        - name:     {{ .Release.Name }}-movie-service
+          image: "{{ .Values.movieService.image.repository }}:{{ .Values.movieService.image.tag | default .Chart.AppVersion }}"
+          command: [{{ .Values.movieService.image.command }}]
+          args: {{ .Values.movieService.image.arg }}
           ports:
             - name: http
-              containerPort: {{ .Values.movie_service.service.port }}
+              containerPort: {{ .Values.movieService.service.port }}
               protocol: TCP
           env:
-          - name: {{ .Values.movie_service.env.envName1 }}
-            value: {{ .Values.movie_service.env.envValue1 }}
-          - name: {{ .Values.movie_service.env.envName2 }}
-            value: {{ .Values.movie_service.env.envValue2 }}
+          - name: {{ .Values.movieService.env.envName1 }}
+            value: {{ .Values.movieService.env.envValue1 }}
+          - name: {{ .Values.movieService.env.envName2 }}
+            value: {{ .Values.movieService.env.envValue2 }}
 ---
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-cast_db
+  name: {{ .Release.Name }}-cast-db
   labels:
-    app: {{ .Release.Name }}-cast_db
+    app: {{ .Release.Name }}-cast-db
 spec:
-  replicas: {{ .Values.cast_db.replicaCount }}
+  replicas: {{ .Values.castDb.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-cast_db
+      app: {{ .Release.Name }}-cast-db
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-cast_db
+        app: {{ .Release.Name }}-cast-db
     spec:
       containers:
-        - name: {{ .Release.Name }}-cast_db
-          image: "{{ .Values.cast_db.image.repository }}:{{ .Values.cast_db.image.tag | default .Chart.AppVersion }}"
+        - name: {{ .Release.Name }}-cast-db
+          image: "{{ .Values.castDb.image.repository }}:{{ .Values.castDb.image.tag | default .Chart.AppVersion }}"
           ports:
           env:
-          - name: {{ .Values.cast_db.env.POSTGRES_USER }}
-            value: {{ .Values.cast_db.env.POSTGRES_USER_value}}
-          - name: {{ .Values.cast_db.env.POSTGRES_PASSWORD }}
-            value: {{ .Values.cast_db.env.POSTGRES_PASSWORD_value }}
-          - name: {{ .Values.cast_db.env.POSTGRES_DB }}
-            value: {{ .Values.cast_db.env.POSTGRES_DB_value }}
+          - name: {{ .Values.castDb.env.POSTGRES_USER }}
+            value: {{ .Values.castDb.env.POSTGRES_USER_value}}
+          - name: {{ .Values.castDb.env.POSTGRES_PASSWORD }}
+            value: {{ .Values.castDb.env.POSTGRES_PASSWORD_value }}
+          - name: {{ .Values.castDb.env.POSTGRES_DB }}
+            value: {{ .Values.castDb.env.POSTGRES_DB_value }}
 
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-cast_service
+  name: {{ .Release.Name }}-cast-service
   labels:
-    app: {{ .Release.Name }}-cast_service
+    app: {{ .Release.Name }}-cast-service
 spec:
-  replicas: {{ .Values.cast_service.replicaCount }}
+  replicas: {{ .Values.castService.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Release.Name }}-cast_service
+      app: {{ .Release.Name }}-cast-service
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}-cast_service
+        app: {{ .Release.Name }}-cast-service
     spec:
       containers:
-        - name:     {{ .Release.Name }}-cast_service
-          image: "{{ .Values.cast_service.image.repository }}:{{ .Values.cast_service.image.tag | default .Chart.AppVersion }}"
-          command: [{{ .Values.cast_service.command }}]
-          args: {{ .Values.cast_service.image.arg }}
+        - name:     {{ .Release.Name }}-cast-service
+          image: "{{ .Values.castService.image.repository }}:{{ .Values.castService.image.tag | default .Chart.AppVersion }}"
+          command: [{{ .Values.castService.command }}]
+          args: {{ .Values.castService.image.arg }}
           ports:
             - name: http
-              containerPort: {{ .Values.cast_service.service.port }}
+              containerPort: {{ .Values.castService.service.port }}
               protocol: TCP
           env:
-          - name: {{ .Values.cast_service.env.envName1 }}
-            value: {{ .Values.cast_service.env.envValue1 }}
+          - name: {{ .Values.castService.env.envName1 }}
+            value: {{ .Values.castService.env.envValue1 }}
 ---
 apiVersion: apps/v1
 kind: Deployment
