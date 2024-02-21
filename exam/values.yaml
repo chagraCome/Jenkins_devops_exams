@@ -62,5 +62,5 @@ cast_service:
     repository: nginx
     tag: "latest"
   service:
-    port:  8000
+    port:  8089
   volumes: ./nginx_config.conf:/etc/nginx/conf.d/default.conf
