@@ -3,7 +3,7 @@ movie_db:
   image: 
     repository: postgres:12.1-alpine
     tag: "latest"
-    service:
+  service:
     type: ClusterIP
     port:  5432
   env:
