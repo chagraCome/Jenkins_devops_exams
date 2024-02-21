@@ -46,7 +46,6 @@ stages {
                     script {
                     sh '''
                     curl http://localhost:8002/api/v1/casts/docs
-                    curl http://localhost:8001/api/v1/movies/docs 
                     '''
                     }
             }
